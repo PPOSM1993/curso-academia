@@ -8,7 +8,7 @@ export default function Navbar() {
     return (
         <>
             <div className='flex justify-between p-4 border-b bg-white h-16'>
-                <SidebarTrigger className='h-8 w-8 bg-black tex-black' />
+                <SidebarTrigger className='h-8 w-8 bg-white tex-black' />
                 <div className='flex gap-4 items-center'>
                     <div className='flex w-full max-w-sm items-center border-gray-300 rounded-lg px-2.5 py-0.5'>
                         <Search className='h-4 w-4 mr-2' />
@@ -19,7 +19,7 @@ export default function Navbar() {
                         />
                     </div>
 
-                    <Button variant='outline' className="bg-black">
+                    <Button variant='outline' className="bg-white">
                         <BellRing />
                     </Button>
                     <SignedOut>
