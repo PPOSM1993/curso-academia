@@ -13,6 +13,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "./(routes)/(root)/components/AppSidebar/AppSidebar";
 import Navbar from "@/components/Shared/Navbar/Navbar";
 import { Footer } from "@/components/Shared";
+import { Toaster } from "@/components/ui/sonner"
 
 
 const spaceGrotesk = Space_Grotesk({
@@ -41,6 +42,7 @@ export default function RootLayout({
             <div className='w-full bg-stone-100 flex flex-col min-h-screen'>
               <Navbar />
               <main className='flex-1'>{children}</main>
+              <Toaster />
               <Footer />
             </div>
           </SidebarProvider>
