@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
+import axios from "axios"
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -30,16 +30,16 @@ export function FormCreateCourse() {
     })
 
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
         console.log(values)
         try {
-
+            axios.post("/api/course", values)
+            toast.success('Curso actualizado')
         } catch (error) {
+            toast.error('Error al actualizar el curso')
             console.error(error)
-            toast.error("Error al crear el curso")
         }
+        console.log(values)
     }
 
     return (
@@ -73,7 +73,7 @@ export function FormCreateCourse() {
                             </FormItem>
                         )}
                     />
-                    <Button type='submit'>Crear curso <Plus/></Button>
+                    <Button type='submit'>Crear curso <Plus /></Button>
 
                 </form>
             </Form>
