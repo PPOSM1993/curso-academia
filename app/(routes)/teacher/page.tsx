@@ -2,6 +2,7 @@ import { currentUser } from '@clerk/nextjs/server'
 import React from 'react'
 import Header from './components/Header/Header';
 import prisma from '@/lib/prisma';
+import { ListCourses } from './components/ListCourses/ListCourses';
 
 export default async function TeacherPage() {
     const user = await currentUser();
@@ -25,6 +26,7 @@ export default async function TeacherPage() {
         <>
             <div>
                 <Header/>
+                <ListCourses courses={courses}/>
             </div>
         </>
     )
