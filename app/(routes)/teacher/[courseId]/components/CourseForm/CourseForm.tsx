@@ -1,14 +1,10 @@
 'use client'
-
 import axios from 'axios'
 import { z } from 'zod'
-
 import { toast } from 'sonner'
 import { Cog, Plus } from 'lucide-react'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-
 import { Button } from '@/components/ui/button'
 import {
     Form,
@@ -32,12 +28,11 @@ import TitleBlock from '../TitleBlock/TitleBlock'
 import { CourseFormProps } from './CourseForm.type'
 import { formSchema } from './CourseForm.form'
 import { Textarea } from "@/components/ui/textarea"
-export default function CourseForm(props: CourseFormProps) {
 
+export default function CourseForm(props: CourseFormProps) {
 
     const { course } = props
 
-    // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -49,7 +44,6 @@ export default function CourseForm(props: CourseFormProps) {
         }
     })
 
-    // 2. Define a submit handler.
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             axios.patch(`/api/course/${course.id}`, values)
@@ -73,7 +67,7 @@ export default function CourseForm(props: CourseFormProps) {
                                 name='title'
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Título del curso</FormLabel>
+                                        <FormLabel>Título del Curso</FormLabel>
                                         <FormControl>
                                             <Input placeholder='Curso de React' {...field} />
                                         </FormControl>
@@ -89,7 +83,7 @@ export default function CourseForm(props: CourseFormProps) {
                                 name='slug'
                                 render={({ field }) => (
                                     <FormItem >
-                                        <FormLabel>Url del curso</FormLabel>
+                                        <FormLabel>Url del Curso</FormLabel>
                                         <FormControl>
                                             <Input placeholder='curso-de-react' {...field} disabled />
                                         </FormControl>
@@ -169,7 +163,7 @@ export default function CourseForm(props: CourseFormProps) {
                                             />
                                         </FormControl>
                                         <FormDescription>
-                                            Esto es lo que el usuario verá como descripción del curso.
+                                            Esto es lo que el usuario verá como Descripción del Curso.
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>
@@ -177,7 +171,7 @@ export default function CourseForm(props: CourseFormProps) {
                             />
 
                         </div>
-                        <Button type='submit'>Guardar Informacion del Curso <Plus /></Button>
+                        <Button type='submit' className='bg-green-600'>Guardar Informacion del Curso <Plus /></Button>
                     </form>
                 </Form>
             </div>
