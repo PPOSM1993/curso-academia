@@ -49,8 +49,11 @@ export default async function CoursePage({
     return (
         <>
             <div className='m-6'>
-               <HeaderCourse idCourse={course.id} isPublished={course.isPublished} />
-               <CourseForm />
+                <HeaderCourse idCourse={course.id} isPublished={course.isPublished} />
+                <CourseForm course={course} />
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-4 my-4'>
+
+                </div>
             </div>
         </>
     )
