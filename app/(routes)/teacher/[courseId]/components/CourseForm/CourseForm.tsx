@@ -4,7 +4,7 @@ import axios from 'axios'
 import { z } from 'zod'
 
 import { toast } from 'sonner'
-import { Cog } from 'lucide-react'
+import { Cog, Plus } from 'lucide-react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -63,12 +63,10 @@ export default function CourseForm(props: CourseFormProps) {
 
     return (
         <>
-            <div className="p-6 bg-white rounded-md">
+            <div className='p-6 bg-white rounded-md'>
                 <TitleBlock title='Información del curso' icon={Cog} />
-
                 <Form {...form}>
-                    <form action="" className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
-
+                    <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                             <FormField
                                 control={form.control}
@@ -90,7 +88,7 @@ export default function CourseForm(props: CourseFormProps) {
                                 control={form.control}
                                 name='slug'
                                 render={({ field }) => (
-                                    <FormItem>
+                                    <FormItem >
                                         <FormLabel>Url del curso</FormLabel>
                                         <FormControl>
                                             <Input placeholder='curso-de-react' {...field} disabled />
@@ -107,14 +105,14 @@ export default function CourseForm(props: CourseFormProps) {
                                 control={form.control}
                                 name='category'
                                 render={({ field }) => (
-                                    <FormItem>
+                                    <FormItem >
                                         <FormLabel>Categoría</FormLabel>
                                         <Select
                                             onValueChange={field.onChange}
                                             defaultValue={field.value}
                                         >
                                             <FormControl>
-                                                <SelectTrigger>
+                                                <SelectTrigger className="w-full">
                                                     <SelectValue placeholder='Selecciona la categoría del curso' />
                                                 </SelectTrigger>
                                             </FormControl>
@@ -143,7 +141,7 @@ export default function CourseForm(props: CourseFormProps) {
                                             defaultValue={field.value}
                                         >
                                             <FormControl>
-                                                <SelectTrigger>
+                                                <SelectTrigger className="w-full">
                                                     <SelectValue placeholder='Selecciona la nivel del curso' />
                                                 </SelectTrigger>
                                             </FormControl>
@@ -161,10 +159,14 @@ export default function CourseForm(props: CourseFormProps) {
                                 control={form.control}
                                 name='description'
                                 render={({ field }) => (
-                                    <FormItem>
+                                    <FormItem className="md:col-span-2">
                                         <FormLabel>Descripción</FormLabel>
                                         <FormControl>
-                                            <Textarea placeholder='Descripción del curso' {...field} />
+                                            <Textarea
+                                                placeholder='Descripción del curso'
+                                                className="w-full min-h-[140px]"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             Esto es lo que el usuario verá como descripción del curso.
@@ -173,8 +175,9 @@ export default function CourseForm(props: CourseFormProps) {
                                     </FormItem>
                                 )}
                             />
-                        </div>
 
+                        </div>
+                        <Button type='submit'>Guardar Informacion del Curso <Plus /></Button>
                     </form>
                 </Form>
             </div>
