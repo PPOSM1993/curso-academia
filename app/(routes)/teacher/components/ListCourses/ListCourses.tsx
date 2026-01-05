@@ -6,7 +6,7 @@ export function ListCourses(props: ListCoursesProps) {
     const { courses } = props;
 
     if (courses.length === 0) {
-        return <p>No hay cursos creados</p>;
+        return <div className="m-8">No hay cursos</div>;
     }
 
     return (
