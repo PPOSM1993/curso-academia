@@ -22,9 +22,9 @@ export default function CourseImage(props: CourseImageProps) {
 
         try {
             axios.patch(`/api/course/${idCourse}`, {
-                imageUrl
+                imageUrl: imageUrl,
             })
-            toast.success('Imagen actualizada')
+            toast.success('Imagen actualizada correctamente')
         } catch (error) {
             console.error(error)
             toast.error('Error al actualizar la imagen')
@@ -39,7 +39,7 @@ export default function CourseImage(props: CourseImageProps) {
                     <UploadButton
                         endpoint='imageUploader'
                         onClientUploadComplete={res => {
-                            onChangeImage(res[0]?.ufsUrl || '')
+                            onChangeImage(res[0]?.ufsUrl)
                             setImage(res[0]?.ufsUrl)
                             setIsEditing(false)
                         }}
