@@ -10,10 +10,10 @@ import FormChapterName from "./FormChapterName";
 export default function ChapterBlock(props: ChapterBlockProps) {
 
     const { chapters, idCourse } = props
-    const router = useRouter()
-    const [chapterList, setChapterList] = useState(chapters || [])
+    const [chapterList, setChapterList] = useState(chapters ?? [])
     const [showInputChapter, setShowInputChapter] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
+
 
     return (
         <>
@@ -22,16 +22,24 @@ export default function ChapterBlock(props: ChapterBlockProps) {
                 <div className='flex gap-2 items-center justify-between mb-3'>
                     <p>Capítulos completos</p>
                     <Button
-                        variant='outline'
+                        variant="default"
                         size='sm'
                         className='bg-green-600 hover:bg-green-600 text-white bg:hover:text-white'
+                        onClick={() => setShowInputChapter(true)}
                     >
                         <PlusCircle className='w-4 h-4' />
                         Crear capítulo
                     </Button>
                 </div>
 
-                <FormChapterName idCourse={idCourse} setShowInputChapter={setShowInputChapter} />
+                {showInputChapter && (
+                    <FormChapterName
+                        setShowInputChapter={setShowInputChapter}
+                        idCourse={idCourse}
+                    />
+                )}
+
+
             </div>
         </>
     )

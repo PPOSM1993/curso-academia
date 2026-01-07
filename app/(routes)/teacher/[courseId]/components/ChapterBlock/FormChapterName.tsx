@@ -21,6 +21,7 @@ import { Input } from '@/components/ui/input'
 import { formSchema } from './FormChapterName.form'
 
 import { FormChapterNameProps } from './FormChapterName.types'
+import { Plus } from 'lucide-react';
 
 export default function FormChapterName(props: FormChapterNameProps) {
     const { idCourse, setShowInputChapter } = props;
@@ -61,7 +62,13 @@ export default function FormChapterName(props: FormChapterNameProps) {
                             </FormItem>
                         )}
                     />
-                    <Button type='submit' disabled={!form.formState.isValid}>Crear</Button>
+                    <Button
+                        type='submit'
+                        disabled={!form.formState.isValid}
+                        className='bg-green-600 hover:bg-green-600 text-white bg:text-white'
+                    >
+                        Crear <Plus className='w-4 h-4 ml-1' />
+                    </Button>
                 </form>
             </Form>
         </>
