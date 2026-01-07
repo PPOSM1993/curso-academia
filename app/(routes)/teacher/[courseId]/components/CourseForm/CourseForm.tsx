@@ -171,7 +171,7 @@ export default function CourseForm(props: CourseFormProps) {
                             />
 
                         </div>
-                        <Button type='submit' className='bg-green-600'>Guardar Informacion del Curso <Plus /></Button>
+                        <Button type='submit' className='bg-green-600 hover:bg-green-600'>Guardar Informacion del Curso <Plus /></Button>
                     </form>
                 </Form>
             </div>
