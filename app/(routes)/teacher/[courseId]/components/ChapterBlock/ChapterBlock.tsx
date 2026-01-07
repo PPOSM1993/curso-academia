@@ -5,6 +5,7 @@ import { ChapterBlockProps } from "./ChapterBlock.types";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import FormChapterName from "./FormChapterName";
 
 export default function ChapterBlock(props: ChapterBlockProps) {
 
@@ -30,8 +31,7 @@ export default function ChapterBlock(props: ChapterBlockProps) {
                     </Button>
                 </div>
 
-                {showInputChapter && <p>Form chapter name ...</p>}
-
+                <FormChapterName idCourse={idCourse} setShowInputChapter={setShowInputChapter} />
             </div>
         </>
     )
