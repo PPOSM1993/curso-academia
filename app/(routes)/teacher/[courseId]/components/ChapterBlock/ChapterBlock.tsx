@@ -38,8 +38,6 @@ export default function ChapterBlock(props: ChapterBlockProps) {
                         idCourse={idCourse}
                     />
                 )}
-
-
             </div>
         </>
     )
