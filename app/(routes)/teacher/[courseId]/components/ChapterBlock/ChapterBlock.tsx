@@ -1,40 +1,73 @@
 "use client";
-import { GripVertical, ListCheck, Pencil, PlusCircle } from "lucide-react";
+import { GripVertical, ListCheck, Loader2, Pencil, PlusCircle } from "lucide-react";
 import TitleBlock from "../TitleBlock/TitleBlock";
 import { ChapterBlockProps } from "./ChapterBlock.types";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-
 import FormChapterName from "./FormChapterName";
 import axios from 'axios'
-
 import {
     DragDropContext,
     Droppable,
     Draggable,
     DropResult
 } from '@hello-pangea/dnd'
-
 import { toast } from 'sonner'
 import { useRouter } from "next/navigation";
 
 export default function ChapterBlock(props: ChapterBlockProps) {
 
     const { chapters, idCourse } = props
-    const [chapterList, setChapterList] = useState(chapters ?? [])
+    const router = useRouter()
+    const [chapterList, setChapterList] = useState(chapters || [])
     const [showInputChapter, setShowInputChapter] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
-    const router = useRouter()
+
+    useEffect(() => {
+        setChapterList(chapters ?? [])
+    }, [chapters])
+
 
     const onDragEnd = (result: DropResult) => {
+        if (!result.destination) return
 
+        const items = Array.from(chapterList)
+        const [reorderedItem] = items.splice(result.source.index, 1)
+        items.splice(result.destination.index, 0, reorderedItem)
+
+        setChapterList(items)
+
+        const bultUpdate = items.map((chapter, index) => {
+            return {
+                id: chapter.id,
+                position: index
+            }
+        })
+
+        onReorder(bultUpdate)
     }
 
-  const onEditChapter = (chapterId: string) => {
-    router.push(`/teacher/${idCourse}/${chapterId}`)
-  }
+    const onReorder = async (
+        onUpdateData: { id: string; position: number }[]
+    ) => {
+        try {
+            setIsUpdating(true)
+            await axios.put(`/api/course/${idCourse}/chapter/reorder`, {
+                list: onUpdateData
+            })
+            toast.success('Capitulos reordenados')
+            router.refresh()
+        } catch (error) {
+            console.error('[Reorder]', error)
+            toast.error('Error al reordenar los capitulos')
+        } finally {
+            setIsUpdating(false)
+        }
+    }
 
-
+    const onEditChapter = (chapterId: string) => {
+        router.push(`/teacher/${idCourse}/${chapterId}`)
+    }
 
     return (
         <>
@@ -58,6 +91,12 @@ export default function ChapterBlock(props: ChapterBlockProps) {
                         setShowInputChapter={setShowInputChapter}
                         idCourse={idCourse}
                     />
+                )}
+
+                {isUpdating && (
+                    <div className='absolute top-0 right-0 w-full h-full flex items-center justify-center bg-slate-500/20'>
+                        <Loader2 className='animate-spin h-6 w-6 text-violet-500' />
+                    </div>
                 )}
 
                 <DragDropContext onDragEnd={onDragEnd}>
@@ -107,11 +146,8 @@ export default function ChapterBlock(props: ChapterBlockProps) {
                             </div>
                         )}
                     </Droppable>
-
                 </DragDropContext>
-
-
             </div>
         </>
     )
-}
+} 
