@@ -46,6 +46,8 @@ export default function HeaderCourse(props: HeaderCourseProps) {
                     <Button onClick={() => router.push('/teacher')}>
                         <MoveLeft className='' /> Volver a todos los cursos
                     </Button>
+<br />
+
 
                     <div className='gap-2 flex items-center'>
                         {isPublished ? (
