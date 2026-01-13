@@ -4,7 +4,7 @@ import TitleBlock from "../TitleBlock/TitleBlock";
 import { ChapterBlockProps } from "./ChapterBlock.types";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+
 import FormChapterName from "./FormChapterName";
 import axios from 'axios'
 
@@ -16,6 +16,7 @@ import {
 } from '@hello-pangea/dnd'
 
 import { toast } from 'sonner'
+import { useRouter } from "next/navigation";
 
 export default function ChapterBlock(props: ChapterBlockProps) {
 
@@ -23,14 +24,16 @@ export default function ChapterBlock(props: ChapterBlockProps) {
     const [chapterList, setChapterList] = useState(chapters ?? [])
     const [showInputChapter, setShowInputChapter] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
+    const router = useRouter()
 
     const onDragEnd = (result: DropResult) => {
 
     }
 
-    const onEditChapter = (idChapter: string) => {
+  const onEditChapter = (chapterId: string) => {
+    router.push(`/teacher/${idCourse}/${chapterId}`)
+  }
 
-    }
 
 
     return (
@@ -100,6 +103,7 @@ export default function ChapterBlock(props: ChapterBlockProps) {
                                         )}
                                     </Draggable>
                                 ))}
+                                {provided.placeholder}
                             </div>
                         )}
                     </Droppable>
