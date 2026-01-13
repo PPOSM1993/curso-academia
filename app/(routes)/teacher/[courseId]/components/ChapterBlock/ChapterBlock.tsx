@@ -1,11 +1,21 @@
 "use client";
-import { ListCheck, PlusCircle } from "lucide-react";
+import { GripVertical, ListCheck, Pencil, PlusCircle } from "lucide-react";
 import TitleBlock from "../TitleBlock/TitleBlock";
 import { ChapterBlockProps } from "./ChapterBlock.types";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import FormChapterName from "./FormChapterName";
+import axios from 'axios'
+
+import {
+    DragDropContext,
+    Droppable,
+    Draggable,
+    DropResult
+} from '@hello-pangea/dnd'
+
+import { toast } from 'sonner'
 
 export default function ChapterBlock(props: ChapterBlockProps) {
 
@@ -13,6 +23,14 @@ export default function ChapterBlock(props: ChapterBlockProps) {
     const [chapterList, setChapterList] = useState(chapters ?? [])
     const [showInputChapter, setShowInputChapter] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
+
+    const onDragEnd = (result: DropResult) => {
+
+    }
+
+    const onEditChapter = (idChapter: string) => {
+
+    }
 
 
     return (
@@ -38,11 +56,57 @@ export default function ChapterBlock(props: ChapterBlockProps) {
                         idCourse={idCourse}
                     />
                 )}
-                {chapterList?.map((chapter, index) => (
-                    <p key={index}>
-                        {chapter.title}
-                    </p>
-                ))}
+
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId="chapters">
+                        {provided => (
+                            <div
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                                className='flex flex-col gap-2'>
+                                {chapterList?.map((chapter, index) => (
+                                    <Draggable
+                                        key={chapter.id}
+                                        draggableId={chapter.id}
+                                        index={index}
+                                    >
+                                        {provided => (
+                                            <div
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                ref={provided.innerRef}
+                                                className='flex gap-2 items-center bg-slate-100 rounded-md py-2 px-4 text-sm justify-between'>
+                                                <div className='flex items-center gap-2'>
+                                                    <GripVertical className='w-4 h-4 text-gray-500' />
+                                                    <p>{chapter.title}</p>
+                                                </div>
+                                                <div className='flex gap-2 items-center px-2 py-1'>
+                                                    {chapter.isPublished ? (
+                                                        <p className='px-2 py-1 text-emerald-600'>
+                                                            Publicado
+                                                        </p>
+                                                    ) : (
+                                                        <p className='px-2 py-1 text-gray-700'>
+                                                            No publicado
+                                                        </p>
+                                                    )}
+                                                    <div className='cursor-pointer'
+                                                        onClick={() => onEditChapter(chapter.id)}>
+                                                        <Pencil className='w-4 h-4 text-gray-500' />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                ))}
+                            </div>
+                        )}
+                    </Droppable>
+
+                </DragDropContext>
+
+
             </div>
         </>
     )
