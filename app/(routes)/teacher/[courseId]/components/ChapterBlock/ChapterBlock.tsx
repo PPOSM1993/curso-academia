@@ -38,6 +38,11 @@ export default function ChapterBlock(props: ChapterBlockProps) {
                         idCourse={idCourse}
                     />
                 )}
+                {chapterList?.map((chapter, index) => (
+                    <p key={index}>
+                        {chapter.title}
+                    </p>
+                ))}
             </div>
         </>
     )
