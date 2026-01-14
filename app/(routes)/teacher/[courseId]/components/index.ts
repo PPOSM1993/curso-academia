@@ -4,6 +4,7 @@ import TitleBlock from "./TitleBlock/TitleBlock";
 import CourseImage from "./CourseImage/CourseImage";
 import CoursePrice from "./CoursePrice/CoursePrice";
 import ChapterForm from "../[chapterId]/ChapterForm/ChapterForm";
+import ChapterTitleForm from "../[chapterId]/ChapterForm/ChapterTitleForm/ChapterTitleForm";
 
 export {
     HeaderCourse,
@@ -11,5 +12,6 @@ export {
     TitleBlock,
     CourseImage,
     CoursePrice,
-    ChapterForm
+    ChapterForm,
+    ChapterTitleForm,
 }

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, Cog, Trash } from "lucide-react"
 import { useRouter } from "next/navigation";
 import { ChapterFormProps } from "./ChapterForm.type";
-import { TitleBlock } from "../../components";
+import { ChapterTitleForm, TitleBlock } from "../../components";
 import { toast } from "sonner";
 import axios from "axios";
 
@@ -32,34 +32,32 @@ export default function ChapterForm(props: ChapterFormProps) {
 
     return (
         <>
-            <div>
-                <div className="p-6 bg-white rounded-md">
+            <div className="">
 
-                    <div className="">
-                        <Button className="mb-4" variant="outline" onClick={() => router.push(`/teacher/${courseId}`)}>
-                            <ArrowLeft className="" />
-                            Volver a la Edicion del Curso
+                <div className="p-6 bg-white rounded-md">
+                    <Button className="mb-4" variant="outline" onClick={() => router.push(`/teacher/${courseId}`)}>
+                        <ArrowLeft className="" />
+                        Volver a la Edicion del Curso
+                    </Button>
+                </div>
+
+                <div className="p-6 mt-6 bg-white rounded-md flex justify-between items-center">
+                    <TitleBlock title="Edición de Capítulo" icon={Cog} />
+
+                    <div className="gap-2 flex items-center">
+                        {chapter?.isPublished ? (
+                            <Button variant="outline" onClick={() => onPublish(false)}>Ocultar</Button>
+                        ) : (
+                            <Button onClick={() => onPublish(true)}>Publicar</Button>
+                        )}
+
+                        <Button className="bg-red-600 hover:bg-red-600" variant="destructive" onClick={() => console.log("Eliminar")}>
+                            <Trash />
                         </Button>
                     </div>
-
-                    <p>Status del Curso: {chapter?.isPublished ? "Publicado" : "Oculto"}</p>
-
-                    <div className="p-6 mt-6 bg-white rounded-md flex justify-between items-center">
-                        <TitleBlock title="Edición de Capítulo" icon={Cog} />
-
-                        <div className="gap-2 flex items-center">
-                            {chapter?.isPublished ? (
-                                <Button variant="outline" onClick={() => onPublish(false)}>Ocultar</Button>
-                            ) : (
-                                <Button onClick={() => onPublish(true)}>Publicar</Button>
-                            )}
-
-                            <Button className="bg-red-600 hover:bg-red-600" variant="destructive" onClick={() => console.log("Eliminar")}>
-                                <Trash />
-                            </Button>
-                        </div>
-                    </div>
                 </div>
+                <ChapterTitleForm chapter={chapter} courseId={courseId} />
+
             </div>
         </>
     )
