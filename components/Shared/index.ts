@@ -1,6 +1,5 @@
 import Navbar from './Navbar/Navbar'
 import Footer from './Footer/Footer'
+import { EditorDescription } from './EditorDescription'
 
-
-
-export { Navbar, Footer }
+export { Navbar, Footer, EditorDescription }
