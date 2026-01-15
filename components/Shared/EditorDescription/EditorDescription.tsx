@@ -2,12 +2,8 @@
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
 import 'react-quill-new/dist/quill.snow.css';
+import { EditorDescriptionProps } from "./EditorDescription.types";
 
-
-export type EditorDescriptionProps = {
-    value: string;
-    onChange: (newValue: string) => void;
-}
 
 export const EditorDescription = (props: EditorDescriptionProps) => {
     const { value, onChange } = props;
@@ -16,10 +12,5 @@ export const EditorDescription = (props: EditorDescriptionProps) => {
         []
     );
 
-
-
-    return (
-        <>
-        </>
-    )
+    return <ReactQuill theme="snow" value={value} onChange={onChange} />
 }
