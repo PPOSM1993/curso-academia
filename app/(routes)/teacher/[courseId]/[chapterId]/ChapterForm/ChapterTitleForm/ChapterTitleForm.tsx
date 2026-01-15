@@ -8,6 +8,8 @@ import { formSchema } from "./ChapterTitleForm.form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { EditorDescription } from "@/components/Shared";
+import { Checkbox } from "@/components/ui/checkbox";
 
 
 
@@ -53,24 +55,38 @@ export default function ChapterTitleForm(props: ChapterTitleFormProps) {
 
                         <FormField
                             control={form.control}
-                            name="title"
+                            name="description"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Titulo Capitulo</FormLabel>
+                                    <FormLabel>Descripcion Capitulo</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Ingrese el titulo del Capítulo" {...field} />
+                                        <EditorDescription {...field} />
                                     </FormControl>
-
-                                    <FormDescription>
-                                        Esto es lo que el usuario verá como título del Capítulo.
+                                    <FormDescription className="mt-6 py-6">
+                                        Descripcion del Capítulo
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         >
                         </FormField>
+                        <FormField
+                            control={form.control}
+                            name="isFree"
+                            render={(field) => (
+                                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md p-4 border border-muted">
+                                <FormControl>
+                                    <Checkbox />
+                                </FormControl>
+
+                                </FormItem>
+                            )}
+
+                        />
+                        <br />
+                        <Button type="submit" className="bg-green-600 hover:bg-green-600 mt-6">Guardar Titulo del Capítulo <Plus /></Button>
+
                     </form>
-                    <Button type="submit" className="bg-green-600 hover:bg-green-600 mt-6">Guardar Titulo del Capítulo <Plus /></Button>
                 </Form>
             </div>
         </>
