@@ -3,18 +3,29 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { ChapterTitleFormProps } from "./ChapterTitleForm.type";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage
+} from "@/components/ui/form";
 import { formSchema } from "./ChapterTitleForm.form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { EditorDescription } from "@/components/Shared";
 import { Checkbox } from "@/components/ui/checkbox";
-
+import axios from "axios";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 
 export default function ChapterTitleForm(props: ChapterTitleFormProps) {
     const { chapter, courseId } = props;
+    const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -25,8 +36,20 @@ export default function ChapterTitleForm(props: ChapterTitleFormProps) {
         }
     })
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log("Submit chapter title form:", values);
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        try {
+            await axios.patch(`/api/course/${courseId}/chapter/${chapter.id}`, {
+                title: values.title,
+                description: values.description,
+                isFree: values.isFree,
+            });
+            toast.success("Capítulo actualizado correctamente");
+            router.refresh();
+
+        } catch (error) {
+            console.log("Error al guardar el título del capítulo:", error);
+            toast.error("Error al guardar el título del capítulo");
+        }
     }
 
     return (
@@ -75,9 +98,22 @@ export default function ChapterTitleForm(props: ChapterTitleFormProps) {
                             name="isFree"
                             render={(field) => (
                                 <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md p-4 border border-muted">
-                                <FormControl>
-                                    <Checkbox />
-                                </FormControl>
+                                    <FormControl>
+                                        <Checkbox
+                                            checked={field.value}
+                                            onChange={field.onChange}
+                                        />
+                                    </FormControl>
+
+                                    <div className="space-y-1 leading-none">
+                                        <FormLabel>
+                                            Capitulo Publico
+                                        </FormLabel>
+                                        <br />
+                                        <FormDescription>
+                                            Si quieres que este capitulo sea visible para todos los usuarios.
+                                        </FormDescription>
+                                    </div>
 
                                 </FormItem>
                             )}
