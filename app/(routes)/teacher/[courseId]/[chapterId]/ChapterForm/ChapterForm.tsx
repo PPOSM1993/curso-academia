@@ -6,6 +6,7 @@ import { ChapterFormProps } from "./ChapterForm.type";
 import { ChapterTitleForm, TitleBlock } from "../../components";
 import { toast } from "sonner";
 import axios from "axios";
+import ChapterVideoForm from "./ChapterVideoForm/ChapterVideoForm";
 
 export default function ChapterForm(props: ChapterFormProps) {
     const { chapter, courseId } = props;
@@ -57,6 +58,7 @@ export default function ChapterForm(props: ChapterFormProps) {
                     </div>
                 </div>
                 <ChapterTitleForm chapter={chapter} courseId={courseId} />
+                <ChapterVideoForm />
 
             </div>
         </>

@@ -8,11 +8,18 @@ export const ourFileRouter = {
       maxFileSize: "4MB",
       maxFileCount: 1,
     },
-  })
+  }).onUploadComplete(({ metadata }) => {
+    return { uploadedBy: metadata };
+  }),
 
-    .onUploadComplete(async ({ metadata }) => {
-      return { uploadedBy: metadata };
-    }),
+  chapterVideo: f({
+    video: {
+      maxFileCount: 1,
+      maxFileSize: "2GB",
+    },
+  }).onUploadComplete(({ file }) => {
+    return { url: file.url };
+  }),
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;
