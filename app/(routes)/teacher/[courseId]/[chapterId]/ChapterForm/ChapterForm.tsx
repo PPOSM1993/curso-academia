@@ -31,6 +31,13 @@ export default function ChapterForm(props: ChapterFormProps) {
         }
     }
 
+    const removeChapter = async () => {
+        axios.delete(`/api/course/${courseId}/chapter/${chapter.id}`);
+        toast.success("Capítulo eliminado correctamente");
+
+        router.push(`/teacher/${courseId}`);
+    }
+
     return (
         <>
             <div className="">
@@ -52,13 +59,14 @@ export default function ChapterForm(props: ChapterFormProps) {
                             <Button onClick={() => onPublish(true)}>Publicar</Button>
                         )}
 
-                        <Button className="bg-red-600 hover:bg-red-600" variant="destructive" onClick={() => console.log("Eliminar")}>
+                        <Button className="bg-red-600 hover:bg-red-600" variant="destructive" 
+                        onClick={() => removeChapter()}>
                             <Trash />
                         </Button>
                     </div>
                 </div>
                 <ChapterTitleForm chapter={chapter} courseId={courseId} />
-                <ChapterVideoForm />
+                <ChapterVideoForm courseId={courseId} chapterId={chapter.id} videoUrl={chapter.videoUrl} />
 
             </div>
         </>
