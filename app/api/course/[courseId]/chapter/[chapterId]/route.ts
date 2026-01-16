@@ -32,3 +32,26 @@ export async function PATCH(
         return new NextResponse("Error al actualizar el capítulo", { status: 500 });
     }
 }
+
+export async function DELETE(req : Request, { params }: { params: Promise<{ courseId: string, chapterId: string }> }) {
+    try {
+        const {userId} = await auth();
+        const { courseId, chapterId } = await params;
+
+        if (!userId) {
+            return new NextResponse("No autorizado", { status: 401 });
+        }
+        const chapter = await prisma.chapter.delete({
+            where: {
+                id: chapterId,
+                courseId: courseId
+            }
+        });
+
+        return NextResponse.json(chapter);
+    } catch (error) {
+        console.log("[COURSE_CHAPTER_DELETE]", error);
+
+        return new NextResponse("Error al eliminar el capítulo", { status: 500 });
+    }
+}

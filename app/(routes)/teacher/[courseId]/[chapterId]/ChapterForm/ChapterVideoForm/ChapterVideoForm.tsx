@@ -6,13 +6,25 @@ import { ChapterVideoForProps } from "./ChapterVideoForm.type";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { UploadButton } from '@/utils/uploadthing'
-
+import axios from "axios";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 export default function ChapterVideoForm(props: ChapterVideoForProps) {
     const { chapterId, courseId, videoUrl } = props;
     const [onEditVideo, setOnEditVideo] = useState(false);
+    const router = useRouter();
 
     const onSubmit = async (url: string) => {
-        console.log("URL", url);
+        try {
+            await axios.patch(`/api/course/${courseId}/chapter/${chapterId}`, {
+                videoUrl: url
+            });
+            toast("Video actualizado correctamente");
+            router.refresh();
+        } catch (error) {
+            console.error(error);
+            toast.error("Error al actualizar el video");
+        }
     }
 
     return (
