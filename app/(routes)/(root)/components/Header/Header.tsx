@@ -1,3 +1,8 @@
+/**
+ * Renders a styled header block labeled "Teacher mode".
+ *
+ * @returns A React element containing a white, rounded container with a flex-aligned title "Teacher mode".
+ */
 export function Header() {
     return (
         <>
