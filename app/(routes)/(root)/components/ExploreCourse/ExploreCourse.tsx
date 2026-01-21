@@ -9,9 +9,9 @@ export function ExploreCourse() {
   const router = useRouter()
 
   return (
-    <div className="my-4 mx-6 border rounded-lg bg-white gap-4">
+    <div className="my-4 mx-6 border rounded-none bg-white gap-4">
       <div className="flex items-center justify-between gap-8 p-6 w-full">
-        
+
         {/* TEXTO */}
         <div className="flex flex-col gap-4 max-w-2xl">
           <h1 className="text-4xl font-semibold">
@@ -35,7 +35,7 @@ export function ExploreCourse() {
         </div>
 
         {/* IMAGEN */}
-        <div className="flex-shrink-0">
+        <div className="flex flex-col items-center justify-center gap-4 w-full">
           <Image
             src="/explore2.svg"
             alt="Todos los Cursos"
