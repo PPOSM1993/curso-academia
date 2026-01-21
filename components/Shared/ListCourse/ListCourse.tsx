@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ListCourseProps } from "./ListCourse.type";
 import Image from "next/image";
+import { IconBadge } from "../IconBadge";
+import { Book, ChartNoAxesColumn } from "lucide-react";
 
 export default function ListCourse(props: ListCourseProps) {
     const { title, courses } = props;
@@ -35,10 +37,17 @@ export default function ListCourse(props: ListCourseProps) {
                                             />
                                         </div>
                                         <div className="p-2">
-                                            <h3 className="text-lg font-semibold text-gray800 truncate">{title}</h3>
+                                            <h3 className="text-lg font-semibold text-gray-800 truncate">{title}</h3>
 
                                             <div className="flex items-center gap-2 justify-between mt-2">
-                                                xD
+                                                <IconBadge
+                                                    icon={Book}
+                                                    text={`${chapters.length} Capítulo(s)`}
+                                                />
+                                                <IconBadge
+                                                    icon={ChartNoAxesColumn}
+                                                    text={level || "Nivel N/A"}
+                                                />
                                             </div>
                                         </div>
                                     </Link>
