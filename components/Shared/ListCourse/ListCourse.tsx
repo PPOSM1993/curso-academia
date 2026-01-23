@@ -3,6 +3,7 @@ import { ListCourseProps } from "./ListCourse.type";
 import Image from "next/image";
 import { IconBadge } from "../IconBadge";
 import { Book, ChartNoAxesColumn } from "lucide-react";
+import { ProgressCourse } from "./ProgressCourse";
 
 export default function ListCourse(props: ListCourseProps) {
     const { title, courses } = props;
@@ -49,6 +50,9 @@ export default function ListCourse(props: ListCourseProps) {
                                                     text={level || "Nivel N/A"}
                                                 />
                                             </div>
+
+                                            <ProgressCourse courseId={id} totalChapters={chapters.length} price={price} />
+
                                         </div>
                                     </Link>
                                 ))}
