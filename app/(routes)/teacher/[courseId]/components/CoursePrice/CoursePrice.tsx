@@ -50,11 +50,11 @@ export default function CoursePrice(props: CoursePriceProps) {
                         <SelectGroup>
                             <SelectLabel>Precio del curso</SelectLabel>
                             <SelectItem value='Gratis'>Gratis</SelectItem>
-                            <SelectItem value='19'>$19.000 CLP</SelectItem>
-                            <SelectItem value='20'>$20.000 CLP</SelectItem>
-                            <SelectItem value='21'>$21.000 CLP</SelectItem>
-                            <SelectItem value='22'>$22.000 CLP</SelectItem>
-                            <SelectItem value='23'>$23.000 CLP</SelectItem>
+                            <SelectItem value='$19.000'>$19.000 CLP</SelectItem>
+                            <SelectItem value='$20.000'>$20.000 CLP</SelectItem>
+                            <SelectItem value='$21.000'>$21.000 CLP</SelectItem>
+                            <SelectItem value='$22.000'>$22.000 CLP</SelectItem>
+                            <SelectItem value='$23.000'>$23.000 CLP</SelectItem>
                         </SelectGroup>
                     </SelectContent>
                 </Select>
